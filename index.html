@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7f4">
+  <title>Ponto — Registro de jornada</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="auth-screen" id="auth-screen">
+      <div class="auth-aside">
+        <a class="brand brand-light" href="#" aria-label="Ponto, página inicial">
+          <span class="brand-mark" aria-hidden="true">p.</span>
+          <span>ponto<span class="brand-dot">.</span></span>
+        </a>
+        <div class="aside-copy">
+          <span class="eyebrow">SUA ROTINA, EM DIA</span>
+          <h1>Seu tempo<br>merece cuidado.</h1>
+          <p>Registre sua jornada com simplicidade e tenha seus horários sempre à mão.</p>
+        </div>
+        <div class="aside-footer">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>Um jeito mais leve de acompanhar seu dia.</span>
+        </div>
+        <div class="decorative-circle decorative-circle-one" aria-hidden="true"></div>
+        <div class="decorative-circle decorative-circle-two" aria-hidden="true"></div>
+      </div>
+
+      <div class="auth-panel">
+        <div class="auth-mobile-brand">
+          <a class="brand" href="#" aria-label="Ponto, página inicial">
+            <span class="brand-mark" aria-hidden="true">p.</span>
+            <span>ponto<span class="brand-dot">.</span></span>
+          </a>
+        </div>
+        <div class="auth-content">
+          <div class="auth-heading">
+            <span class="eyebrow" id="auth-eyebrow">BEM-VINDO DE VOLTA</span>
+            <h2 id="auth-title">Acesse sua conta</h2>
+            <p id="auth-description">Entre com seu ID de usuário e senha para continuar.</p>
+          </div>
+
+          <form id="login-form" class="auth-form">
+            <label for="login-id">ID de usuário</label>
+            <input id="login-id" name="userId" autocomplete="username" placeholder="Ex.: maria.silva" required>
+            <div class="label-row">
+              <label for="login-password">Senha</label>
+            </div>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Sua senha" required>
+            <p class="form-message" id="login-message" role="alert"></p>
+            <button class="button button-primary button-full" type="submit">Entrar <span aria-hidden="true">→</span></button>
+          </form>
+
+          <form id="register-form" class="auth-form hidden">
+            <label for="register-name">Nome completo</label>
+            <input id="register-name" name="name" autocomplete="name" placeholder="Como podemos te chamar?" required maxlength="80">
+            <label for="register-id">ID de usuário</label>
+            <input id="register-id" name="userId" autocomplete="username" placeholder="Escolha um ID (ex.: maria.silva)" required minlength="3" maxlength="30" pattern="[A-Za-z0-9._\-]+" title="Use pelo menos 3 caracteres: letras, números, ponto, hífen ou sublinhado.">
+            <label for="register-password">Senha</label>
+            <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="Pelo menos 8 caracteres" required minlength="8">
+            <p class="form-message" id="register-message" role="alert"></p>
+            <button class="button button-primary button-full" type="submit">Criar minha conta <span aria-hidden="true">→</span></button>
+          </form>
+
+          <p class="auth-switch" id="login-switch">Ainda não tem uma conta? <button class="text-button" type="button" data-view="register">Criar conta</button></p>
+          <p class="auth-switch hidden" id="register-switch">Já tem uma conta? <button class="text-button" type="button" data-view="login">Entrar</button></p>
+          <p class="privacy-note"><span aria-hidden="true">🔒</span> Seus dados ficam protegidos no servidor.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Ponto, página inicial">
+          <span class="brand-mark" aria-hidden="true">p.</span>
+          <span>ponto<span class="brand-dot">.</span></span>
+        </a>
+        <div class="user-menu">
+          <div class="user-avatar" id="user-avatar" aria-hidden="true">U</div>
+          <div class="user-details">
+            <span class="user-name" id="user-name">Usuário</span>
+            <span class="user-id" id="user-id"></span>
+          </div>
+          <button id="logout-button" class="button button-quiet" type="button">Sair <span aria-hidden="true">↗</span></button>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <div class="welcome-row">
+          <div>
+            <span class="eyebrow">ÁREA DE REGISTRO</span>
+            <h1>Olá, <span id="welcome-name">pessoa</span> <span aria-hidden="true">✳</span></h1>
+            <p>Acompanhe sua jornada e mantenha tudo organizado.</p>
+          </div>
+          <div class="today-chip"><span class="live-dot" aria-hidden="true"></span> <span id="today-date"></span></div>
+        </div>
+
+        <div class="dashboard-grid">
+          <section class="card clock-card">
+            <div class="card-heading">
+              <div>
+                <span class="eyebrow">SEU HORÁRIO</span>
+                <h2>Registro de ponto</h2>
+              </div>
+              <span class="card-icon" aria-hidden="true">◷</span>
+            </div>
+            <div class="clock-display" id="live-clock" aria-live="off">00:00:00</div>
+            <p class="clock-date" id="clock-date"></p>
+            <div class="status-line">
+              <span class="status-dot" id="status-dot"></span>
+              <span id="status-text">Você ainda não registrou uma entrada hoje.</span>
+            </div>
+            <div class="punch-actions">
+              <button class="button button-primary" id="clock-in-button" type="button">
+                <span aria-hidden="true">↗</span> Registrar entrada
+              </button>
+              <button class="button button-outline" id="clock-out-button" type="button" disabled>
+                <span aria-hidden="true">↙</span> Registrar saída
+              </button>
+            </div>
+            <p class="form-message" id="punch-message" role="status"></p>
+          </section>
+
+          <section class="card summary-card">
+            <div class="card-heading">
+              <div>
+                <span class="eyebrow">RESUMO DE HOJE</span>
+                <h2>Sua jornada</h2>
+              </div>
+              <span class="card-icon card-icon-soft" aria-hidden="true">✳</span>
+            </div>
+            <div class="summary-stat">
+              <span class="summary-number" id="today-count">0</span>
+              <span class="summary-label">registros<br>realizados</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-foot">
+              <span class="summary-foot-icon" aria-hidden="true">✓</span>
+              <span>Seus registros ficam armazenados no servidor.</span>
+            </div>
+          </section>
+        </div>
+
+        <section class="card history-card">
+          <div class="history-heading">
+            <div>
+              <span class="eyebrow">SEUS REGISTROS</span>
+              <h2>Histórico de ponto</h2>
+            </div>
+            <span class="history-count" id="history-count">0 registros</span>
+          </div>
+          <div class="history-table-wrap">
+            <table>
+              <thead>
+                <tr><th>DATA</th><th>HORÁRIO</th><th>TIPO DE REGISTRO</th></tr>
+              </thead>
+              <tbody id="history-body"></tbody>
+            </table>
+            <div class="empty-state" id="empty-history">
+              <span class="empty-icon" aria-hidden="true">◷</span>
+              <strong>Nenhum registro por enquanto</strong>
+              <span>Seu primeiro horário registrado aparecerá aqui.</span>
+            </div>
+          </div>
+        </section>
+        <footer class="dashboard-footer">Ponto Digital <span>·</span> Organização que acompanha você.</footer>
+      </div>
+    </section>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
